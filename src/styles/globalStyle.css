@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/* ==== Paleta clara e profissional ==== */
+/* Cinzas (modo claro) */
+/* Extras (para compatibilidade com módulos antigos) */
+/* Layout */
+/* Gradientes / superfícies */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #f7f7f8;
+  color: #2a2a2a;
+  font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Títulos */
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+/* Containers e seções */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 3rem 1rem;
+}
+
+.section.white {
+  background: #ffffff;
+}
+
+.section.gray {
+  background: #f1f2f4;
+}
+
+/* Links e botões */
+a {
+  color: #c2162c;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  transition: transform 0.05s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Botões padrões */
+.btn-primary {
+  background: #c2162c;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: rgb(166.5166666667, 18.8833333333, 37.7666666667);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: #ffffff;
+  color: #2a2a2a;
+  border-color: #e6e8eb;
+}
+
+.btn-ghost:hover {
+  border-color: #c2162c;
+  color: #c2162c;
+}
+
+/* Utilidades */
+.card {
+  background: #ffffff;
+  border: 1px solid #e6e8eb;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+}/*# sourceMappingURL=globalStyle.css.map */

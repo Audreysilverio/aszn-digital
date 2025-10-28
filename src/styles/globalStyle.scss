@@ -1,0 +1,55 @@
+@use "sass:color";
+@use "./variables" as *;
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; list-style: none; text-decoration: none; }
+html, body, #root { height: 100%; }
+
+body {
+  background: $cinza-100;
+  color: $texto;
+  font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Títulos */
+h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; }
+h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.25; }
+h3 { font-size: 1.25rem; }
+
+/* Containers e seções */
+.container { max-width: $container-max; margin: 0 auto; padding: 0 1rem; }
+.section { padding: 3rem 1rem; }
+.section.white { background: $branco; }
+.section.gray  { background: $cinza-150; }
+
+/* Links e botões */
+a { color: $carmim; }
+
+button {
+  border: 1px solid transparent;
+  border-radius: $radius;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  transition: transform .05s ease, background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+/* Botões padrões */
+.btn-primary { background: $carmim; color: $branco; }
+.btn-primary:hover {
+  background: color.adjust($carmim, $lightness: -6%);
+  transform: translateY(-1px);
+}
+
+.btn-ghost { background: $branco; color: $texto; border-color: $cinza-200; }
+.btn-ghost:hover { border-color: $carmim; color: $carmim; }
+
+/* Utilidades */
+.card {
+  background: $branco;
+  border: 1px solid $cinza-200;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: 1rem;
+}

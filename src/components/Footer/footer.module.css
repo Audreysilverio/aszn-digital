@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/* ==== Paleta clara e profissional ==== */
+/* Cinzas (modo claro) */
+/* Extras (para compatibilidade com módulos antigos) */
+/* Layout */
+/* Gradientes / superfícies */
+.footer {
+  background-color: #ffffff;
+  color: #2a2a2a;
+  padding: 2rem 1rem 1rem;
+  border-top: 1px solid #e6e8eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.contatosFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.contatosFooter p {
+  font-size: 1.05rem;
+  color: #9aa0a6;
+  font-weight: 600;
+}
+.contatosFooter nav {
+  display: flex;
+  gap: 0.8rem;
+}
+.contatosFooter nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 🔴 destaque para os ícones brancos */
+  background-color: #c2162c;
+  border: 1px solid rgb(157.3555555556, 17.8444444444, 35.6888888889);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.05s ease;
+}
+.contatosFooter nav a:hover {
+  background-color: rgb(166.5166666667, 18.8833333333, 37.7666666667);
+  border-color: rgb(139.0333333333, 15.7666666667, 31.5333333333);
+  transform: translateY(-1px);
+}
+.contatosFooter nav a img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.copyright {
+  border-top: 1px solid #e6e8eb;
+  padding-top: 1rem;
+  max-width: 900px;
+}
+.copyright p {
+  font-size: 0.9rem;
+  color: #9aa0a6;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .contatosFooter nav {
+    gap: 0.6rem;
+  }
+  .contatosFooter nav a {
+    width: 36px;
+    height: 36px;
+  }
+  .contatosFooter nav a img {
+    width: 18px;
+    height: 18px;
+  }
+  .copyright p {
+    font-size: 0.85rem;
+  }
+}/*# sourceMappingURL=footer.module.css.map */

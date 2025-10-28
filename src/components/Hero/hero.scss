@@ -1,0 +1,9 @@
+@use "../../styles/variables" as *;
+
+.hero {
+  background: $gradiente-hero; color: $branco;
+  padding: 3.2rem 0;
+  .container { max-width: $container-max; margin:0 auto; padding: 0 1rem; }
+  h1 { color: $branco; margin-bottom:.6rem; }
+  p { color: rgba(255,255,255,.85); max-width: 720px; margin-bottom:1rem; }
+}

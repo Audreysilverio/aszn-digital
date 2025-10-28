@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/* ==== Paleta clara e profissional ==== */
+/* Cinzas (modo claro) */
+/* Extras (para compatibilidade com módulos antigos) */
+/* Layout */
+/* Gradientes / superfícies */
+.hero {
+  background: linear-gradient(135deg, #6b7280 0%, #8b9098 100%);
+  color: #ffffff;
+  padding: 3.2rem 0;
+}
+.hero .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.hero h1 {
+  color: #ffffff;
+  margin-bottom: 0.6rem;
+}
+.hero p {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 720px;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=hero.css.map */

@@ -1,0 +1,142 @@
+@charset "UTF-8";
+/* ==== Paleta clara e profissional ==== */
+/* Cinzas (modo claro) */
+/* Extras (para compatibilidade com módulos antigos) */
+/* Layout */
+/* Gradientes / superfícies */
+/* Centraliza e define espaçamento padrão de containers */
+/* Sombras */
+/* Botões */
+/* Títulos com linha carmim */
+/* Inputs */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #e6e8eb;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0;
+}
+
+/* ESQUERDA: logo + nome */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #2a2a2a;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+/* DIREITA: nav + busca lado a lado */
+.right {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Navegação */
+.navHeader ul {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link {
+  color: #5b6066;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.link:hover {
+  color: #2a2a2a;
+  border-color: #c2162c;
+}
+
+/* Busca */
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.search input {
+  background: #f1f2f4;
+  border: 1px solid #e6e8eb;
+  color: #2a2a2a;
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  width: 230px;
+}
+.search input::-moz-placeholder {
+  color: #9aa0a6;
+}
+.search input::placeholder {
+  color: #9aa0a6;
+}
+
+.search button {
+  background: #c2162c;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.search button:hover {
+  background: rgb(166.5166666667, 18.8833333333, 37.7666666667);
+}
+.search button img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+/* RESPONSIVO: empilha nav e busca sob o brand quando a tela reduzir */
+@media (max-width: 980px) {
+  .container {
+    flex-wrap: wrap;
+    row-gap: 0.6rem;
+  }
+  .right {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+  .navHeader ul {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .search input {
+    width: min(100%, 260px);
+  }
+}/*# sourceMappingURL=header.module.css.map */

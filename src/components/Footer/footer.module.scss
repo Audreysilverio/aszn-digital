@@ -1,0 +1,50 @@
+.footer {
+  background-color: #111;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.contatosFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ddd;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, filter 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+        filter: brightness(1.4);
+      }
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(1); // deixa os ícones brancos
+    }
+  }
+}
+
+.copyright {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}

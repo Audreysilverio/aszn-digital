@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Metadados principais -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#960018" /> <!-- vermelho carmim -->
+    <title>Associação Sempre Zaki Narchi</title>
+    <meta
+      name="description"
+      content="ONG Sempre Zaki Narchi — projetos sociais, educação e oportunidades para crianças e adolescentes da comunidade."
+    />
+
+    <!-- Ícones -->
+    <link rel="icon" type="image/png" href="./src/assets/logoFavicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./src/assets/logoFavicon.png" />
+
+    <!-- SEO e compartilhamento -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Associação Sempre Zaki Narchi" />
+    <meta property="og:title" content="Associação Sempre Zaki Narchi" />
+    <meta
+      property="og:description"
+      content="Conheça nossos projetos sociais e saiba como contribuir com a Sempre Zaki Narchi."
+    />
+    <meta property="og:image" content="./src/assets/logoFavicon.png" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- Paleta de Cores (CSS Global) -->
+    <style>
+      :root {
+        --carmim: #960018; /* vermelho carmim */
+        --branco: #ffffff;
+        --cinza: #9a9a9a;
+        --preto: #0f0f0f;
+        --fundo: #111111;
+      }
+
+      html,
+      body {
+        background-color: var(--fundo);
+        color: var(--branco);
+        margin: 0;
+        font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      }
+
+      header,
+      footer {
+        background-color: var(--preto);
+        color: var(--branco);
+      }
+
+      a {
+        color: var(--carmim);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      button {
+        background-color: var(--carmim);
+        color: var(--branco);
+        border: none;
+        border-radius: 6px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #b50c1b; /* carmim mais claro */
+      }
+    </style>
+
+    <!-- Dados estruturados -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Associação Sempre Zaki Narchi",
+        "url": "https://www.semprezakinarchi.org.br/",
+        "logo": "./src/assets/logoFavicon.png",
+        "description": "Organização da sociedade civil que atua com crianças e adolescentes em educação, cultura e cidadania.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "São Paulo",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "sameAs": ["https://www.instagram.com/semprezakinarchi"]
+      }
+    </script>
+  </head>
+
+  <body>
+    <noscript>
+      <strong>Por favor, ative o JavaScript para usar a plataforma Sempre Zaki Narchi.</strong>
+    </noscript>
+
+    <div id="root" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

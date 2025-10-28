@@ -1,0 +1,188 @@
+/* 🎨 Paleta de cores */
+$carmin: #c8102e;
+$texto: #111;
+$cinza: #f5f5f5;
+
+/* 🌐 Cabeçalho base */
+.header {
+  background: #fff;
+  color: $texto;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* 🔺 Marca / Logo */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  color: $texto;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: 1rem;
+}
+
+/* 📎 Área Direita */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* 🔗 Navegação Desktop */
+.navHeader {
+  display: block;
+
+  ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.link {
+  color: $texto;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: #fff;
+    background: $carmin;
+  }
+}
+
+/* 🍔 Botão do Menu Hambúrguer */
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 20px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: $texto;
+  transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+}
+
+/* ✖️ Animação de transformação */
+.barTopOpen {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.barMidOpen {
+  opacity: 0;
+}
+
+.barBotOpen {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* 🔲 Overlay escuro ao abrir menu mobile */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 40;
+}
+
+/* 📱 Menu Mobile */
+.navMobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(80vw, 360px);
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    li a {
+      display: block;
+      padding: 0.9rem 0.6rem;
+      border-radius: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $texto;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background: $cinza;
+        color: $carmin;
+      }
+    }
+  }
+}
+
+/* Estado ativo (menu aberto) */
+.navMobile.ativo {
+  transform: translateX(0);
+}
+
+/* 📏 Responsividade */
+@media (max-width: 992px) {
+  .title {
+    display: none; // opcional: oculta nome longo perto do breakpoint
+  }
+}
+
+@media (max-width: 768px) {
+  .navHeader {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+}
