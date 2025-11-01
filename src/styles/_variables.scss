@@ -1,27 +1,13 @@
-/* ==== Paleta clara e profissional ==== */
-$carmim: #c2162c;
-$carmim-escuro: #960018;
+/* Paleta base */
+$carmin: #c8102e;
+$texto: #111;
+$branco: #fff;
 
-$preto: #1a1a1a;
-$texto: #2a2a2a;
-$branco: #ffffff;
-
-/* Cinzas (modo claro) */
-$cinza-100: #f7f7f8;   // fundo principal
-$cinza-150: #f1f2f4;   // superfícies suaves
-$cinza-200: #e6e8eb;   // bordas
-$cinza-300: #cfd4d9;
-$cinza-400: #9aa0a6;   // textos auxiliares
-
-/* Extras (para compatibilidade com módulos antigos) */
-$cinza-escuro: #2c2c2c;
-$cinza-profundo: #1a1a1a;
+/* Cinzas */
+$cinza-150: #f4f4f4;
+$cinza-200: #e0e0e0;
 
 /* Layout */
-$radius: 14px;
 $container-max: 1200px;
-$shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-
-/* Gradientes / superfícies */
-$gradiente-header: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.02));
-$gradiente-hero: linear-gradient(135deg, #6b7280 0%, #8b9098 100%);
+$radius: 12px;
+$shadow: 0 8px 24px rgba(0,0,0,.06);

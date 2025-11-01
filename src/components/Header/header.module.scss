@@ -80,8 +80,8 @@ $cinza: #f5f5f5;
   transition: color 0.2s ease, background 0.2s ease;
 
   &:hover {
-    color: $texto;
-    background: $cinza;       /* hover mais suave */
+    color: white;
+    background: $carmin;       /* hover mais suave */
   }
 }
 

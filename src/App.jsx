@@ -1,6 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+// App.jsx (corrigido)
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+
 import Inicio from "./pages/inicio/Inicio";
 import QuemSomos from "./pages/quemSomos/QuemSomos";
 import NossasAtividades from "./pages/nossasAtividades/NossasAtividades";
@@ -11,7 +13,7 @@ import Admin from "./pages/admin/Admin";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <main>
         <Routes>
@@ -25,6 +27,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }

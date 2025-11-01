@@ -125,15 +125,6 @@ export default function Contato() {
         )}
       </div>
 
-      <p
-        style={{
-          marginTop: "1rem",
-          color: "#333",
-          fontSize: "0.95rem",
-        }}
-      >
-        📍 Associação Sempre Zaki Narchi — São Paulo/SP
-      </p>
     </section>
   );
 }
