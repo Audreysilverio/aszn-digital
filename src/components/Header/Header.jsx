@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <header className={s.header}>
       <div className={s.container}>
-        {/* ESQUERDA: logo + nome */}
+        {/* ESQUERDA: marca */}
         <Link to="/" className={s.brand} aria-label="Voltar ao início">
           <img
             src={logoFavicon}
@@ -36,11 +36,14 @@ export default function Header() {
         {/* DIREITA: navegação (desktop) */}
         <div className={s.right}>
           <nav className={s.navHeader} aria-label="Navegação principal">
-            <ul>
+            <ul className={s.menu}>
               <li><Link className={s.link} to="/">Início</Link></li>
               <li><Link className={s.link} to="/quem-somos">Quem Somos</Link></li>
               <li><Link className={s.link} to="/nossas-atividades">Nossas Atividades</Link></li>
+              <li><Link className={s.link} to="/voluntariado">Voluntariado</Link></li>
+              <li><Link className={s.link} to="/doacoes">Doações</Link></li>
               <li><Link className={s.link} to="/contato">Contato</Link></li>
+              <li><Link className={`${s.link} ${s.adminLink}`} to="/admin">Intranet</Link></li>
             </ul>
           </nav>
 
@@ -60,7 +63,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Overlay para fechar ao clicar fora (mobile) */}
+      {/* Overlay (mobile) */}
       {menuAberto && <div className={s.overlay} onClick={() => setMenuAberto(false)} />}
 
       {/* MENU MOBILE */}
@@ -73,7 +76,10 @@ export default function Header() {
           <li><Link className={s.link} to="/">Início</Link></li>
           <li><Link className={s.link} to="/quem-somos">Quem Somos</Link></li>
           <li><Link className={s.link} to="/nossas-atividades">Nossas Atividades</Link></li>
+          <li><Link className={s.link} to="/voluntariado">Voluntariado</Link></li>
+          <li><Link className={s.link} to="/doacoes">Doações</Link></li>
           <li><Link className={s.link} to="/contato">Contato</Link></li>
+          <li><Link className={`${s.link} ${s.adminLink}`} to="/admin">Intranet</Link></li>
         </ul>
       </nav>
     </header>
