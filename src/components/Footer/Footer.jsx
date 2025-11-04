@@ -86,7 +86,7 @@ export default function Footer() {
 
       <section className={s.copyright}>
         <p>
-          Layout desenvolvido pelos alunos da UNIVESP do Eixo de Computação 2025 • Projeto Sempre Zaki Narchi Digital
+          Layout desenvolvido pelos alunos da UNIVESP do Eixo de Computação 2025 • Projeto Plataforma Associação Sempre Zaki Narchi Digital
         </p>
       </section>
     </footer>
