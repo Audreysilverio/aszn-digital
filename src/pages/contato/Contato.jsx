@@ -1,94 +1,36 @@
+import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
+import s from "./contato.module.scss";
+
 export default function Contato() {
   const redes = {
     instagram: "https://www.instagram.com/sempre_zakinarchi/",
     facebook: "https://www.facebook.com/asznong/?locale=pt_BR",
+    tiktok: "http://www.tiktok.com/@sempre_zakinarchi",
   };
 
   return (
-    <section
-      style={{
-        color: "#1a1a1a",
-        textAlign: "center",
-        padding: "3rem 2rem",
-        background: "#f5f5f5",
-      }}
-    >
-      <h2
-        style={{
-          color: "#111",
-          fontSize: "2rem",
-          fontWeight: "700",
-          textTransform: "uppercase",
-          letterSpacing: "1px",
-          marginBottom: "1.5rem",
-        }}
-      >
-        Fale Conosco
-      </h2>
+    <section className={s.contato}>
+      <h2>Fale Conosco</h2>
 
-      <p
-        style={{
-          maxWidth: "700px",
-          margin: "0 auto 1.5rem",
-          lineHeight: "1.6",
-          fontSize: "1rem",
-          color: "#444",
-        }}
-      >
+      <p>
         Quer saber mais sobre nossos projetos ou participar das atividades da
         Associação Sempre Zaki Narchi?
       </p>
 
-      <p
-        style={{
-          maxWidth: "700px",
-          margin: "0 auto 2rem",
-          lineHeight: "1.6",
-          fontSize: "1rem",
-          color: "#444",
-        }}
-      >
+      <p>
         Fique por dentro das novidades e envie suas mensagens pelas nossas redes sociais:
       </p>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "1rem",
-          flexWrap: "wrap",
-          marginBottom: "2rem",
-        }}
-      >
+      <div className={s.botoes}>
         {redes.instagram && (
           <a
             href={redes.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.8rem 1.6rem",
-              border: "2px solid #c8102e",
-              color: "#c8102e",
-              borderRadius: "8px",
-              fontWeight: "600",
-              textDecoration: "none",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-              transition: "all 0.25s ease",
-            }}
-            onMouseOver={(e) => {
-              e.target.style.background = "#c8102e";
-              e.target.style.color = "#fff";
-            }}
-            onMouseOut={(e) => {
-              e.target.style.background = "transparent";
-              e.target.style.color = "#c8102e";
-            }}
+            className={`${s.btn} ${s.btnInstagram}`}
           >
-            📸 Instagram
+            <FaInstagram className={s.icon} />
+            Instagram
           </a>
         )}
 
@@ -97,34 +39,25 @@ export default function Contato() {
             href={redes.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.8rem 1.6rem",
-              border: "2px solid #c8102e",
-              color: "#c8102e",
-              borderRadius: "8px",
-              fontWeight: "600",
-              textDecoration: "none",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-              transition: "all 0.25s ease",
-            }}
-            onMouseOver={(e) => {
-              e.target.style.background = "#c8102e";
-              e.target.style.color = "#fff";
-            }}
-            onMouseOut={(e) => {
-              e.target.style.background = "transparent";
-              e.target.style.color = "#c8102e";
-            }}
+            className={`${s.btn} ${s.btnFacebook}`}
           >
-            👍 Facebook
+            <FaFacebookF className={s.icon} />
+            Facebook
+          </a>
+        )}
+
+        {redes.tiktok && (
+          <a
+            href={redes.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${s.btn} ${s.btnTiktok}`}
+          >
+            <FaTiktok className={s.icon} />
+            TikTok
           </a>
         )}
       </div>
-
     </section>
   );
 }

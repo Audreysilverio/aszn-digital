@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="TikTok">
+  <defs>
+    <style>
+      .disc{fill:#fff}
+      .glyph{fill:#000}
+    </style>
+  </defs>
+  <!-- disco branco -->
+  <circle class="disc" cx="256" cy="256" r="240"></circle>
+  <!-- glifo TikTok (monocromático simplificado p/ favicon/icon) -->
+  <path class="glyph" d="M320 104h52c5 36 31 60 60 64v52c-26 0-50-8-72-22v132c0 67-53 122-120 124-66 2-122-54-122-120 0-65 52-118 117-120 10 0 19 1 28 3v52c-7-2-15-3-23-3-39 0-70 31-70 68s32 70 71 68c37-2 67-34 67-72V104z"></path>
+</svg>

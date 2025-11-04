@@ -24,10 +24,9 @@
 .feedContainer {
   max-width: 1100px;
   margin: 2rem auto 0 auto;
-  background: #f5f5f5;
   border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 1rem 0 0; /* tira o padding inferior que criava o vão */
+  background: transparent; /* sem fundo cinza, usa o fundo do site */
 
   h3 {
     margin: 0.5rem 0 1rem;
@@ -39,24 +38,28 @@
 .feedWrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
   overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* LightWidget (global) */
+:global(.lightwidget-widget) {
+  width: 100%;
+  border: 0;
+  overflow: hidden;
+  display: block;
+  min-height: 210px; /* altura mínima ajustada */
   border-radius: 12px;
   background: #fff;
 }
 
-.iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  overflow: hidden;
-}
-
+/* Link de fallback */
 .fallback {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   color: #444;
+  font-size: 0.95rem;
 
   a {
     color: #c8102e;
@@ -79,7 +82,10 @@
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 700;
@@ -87,6 +93,11 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   transition: all 0.25s ease;
+}
+
+.icon {
+  font-size: 1.2rem;
+  vertical-align: middle;
 }
 
 /* Instagram (vermelho carmim) */
@@ -111,6 +122,19 @@
   }
 }
 
+/* TikTok (preto com hover carmim) */
+.btnTiktok {
+  border: 2px solid white;
+  color: white;
+  background: black;
+
+  &:hover {
+    background: black;
+    color: gray;
+    border-color: black;
+  }
+}
+
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
   .inicio {
@@ -126,5 +150,9 @@
   .btn {
     width: 100%;
     max-width: 260px;
+  }
+
+  :global(.lightwidget-widget) {
+    min-height: 260px;
   }
 }

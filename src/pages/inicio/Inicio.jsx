@@ -1,8 +1,19 @@
+import { useEffect } from "react";
+import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
 import s from "./inicio.module.scss";
 
 export default function Inicio() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.lightwidget.com/widgets/lightwidget.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
   const perfilInstagram = "https://www.instagram.com/sempre_zakinarchi/";
   const perfilFacebook = "https://www.facebook.com/asznong/?locale=pt_BR";
+  const perfilTiktok = "http://www.tiktok.com/@sempre_zakinarchi";
 
   return (
     <section className={s.inicio}>
@@ -25,11 +36,16 @@ export default function Inicio() {
         <div className={s.feedWrapper}>
           <iframe
             title="Feed Instagram ASZN"
-            src="https://cdn.lightwidget.com/widgets/SEU_WIDGET_ID.html"
+            src="https://cdn.lightwidget.com/widgets/da75afa70c26559ea044467291f726c0.html"
+            scrolling="no"
+            allowTransparency="true"
+            className="lightwidget-widget"
             loading="lazy"
-            className={s.iframe}
             referrerPolicy="no-referrer-when-downgrade"
-          />
+            onLoad={() =>
+              setTimeout(() => window.dispatchEvent(new Event("resize")), 100)
+            }
+          ></iframe>
         </div>
 
         <p className={s.fallback}>
@@ -40,7 +56,7 @@ export default function Inicio() {
         </p>
       </div>
 
-      {/* ---- CTA REDES SOCIAIS ---- */}
+      {/* ---- BOTÕES DAS REDES ---- */}
       <div className={s.redesContainer}>
         <a
           href={perfilInstagram}
@@ -48,7 +64,8 @@ export default function Inicio() {
           rel="noopener noreferrer"
           className={`${s.btn} ${s.btnInstagram}`}
         >
-          📸 Siga no Instagram
+          <FaInstagram className={s.icon} />
+          Instagram
         </a>
 
         <a
@@ -57,7 +74,18 @@ export default function Inicio() {
           rel="noopener noreferrer"
           className={`${s.btn} ${s.btnFacebook}`}
         >
-          👍 Siga no Facebook
+          <FaFacebookF className={s.icon} />
+          Facebook
+        </a>
+
+        <a
+          href={perfilTiktok}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${s.btn} ${s.btnTiktok}`}
+        >
+          <FaTiktok className={s.icon} />
+          TikTok
         </a>
       </div>
     </section>

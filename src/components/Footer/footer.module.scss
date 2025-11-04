@@ -1,50 +1,62 @@
 .footer {
-  background-color: #111;
+  background: #111; /* preto */
   color: #fff;
-  padding: 2rem 1rem;
   text-align: center;
+  padding: 2rem 1rem 1rem;
+  font-size: 0.95rem;
 }
 
 .contatosFooter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  margin-bottom: 1rem;
 
   p {
-    margin: 0;
-    font-size: 1rem;
-    color: #ddd;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
   }
+}
 
-  nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.2rem;
+/* Ícones de redes sociais */
+.redes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
-    a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease, filter 0.3s ease;
+.icon {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.25s ease, filter 0.25s ease;
 
-      &:hover {
-        transform: scale(1.1);
-        filter: brightness(1.4);
-      }
-    }
-
-    img {
-      width: 32px;
-      height: 32px;
-      filter: brightness(0) invert(1); // deixa os ícones brancos
-    }
+  &:hover {
+    transform: scale(1.15);
+    filter: invert(39%) sepia(86%) saturate(3185%) hue-rotate(339deg)
+      brightness(91%) contrast(105%); /* efeito carmim no hover */
   }
 }
 
 .copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 1.5rem;
-  font-size: 0.85rem;
-  color: #aaa;
+  padding-top: 1rem;
+
+  p {
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.4;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .contatosFooter p {
+    font-size: 0.9rem;
+  }
 }

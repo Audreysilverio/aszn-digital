@@ -1,0 +1,135 @@
+
+:root {
+  --carmim: #c8102e;
+  --preto: #111111;
+  --cinza-900: #1a1a1a;
+  --cinza-700: #444444;
+  --cinza-100: #f5f5f5;
+  --fb-azul: #3b5998;
+}
+
+.contato {
+  color: var(--cinza-900);
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--cinza-100);
+
+  h2 {
+    color: var(--preto);
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    max-width: 700px;
+    margin: 0 auto 1.25rem;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--cinza-700);
+  }
+}
+
+/* Container dos botões */
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem auto 0;
+}
+
+/* Botão base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 2px solid var(--carmim);
+  color: var(--carmim);
+  background: transparent;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+  will-change: transform;
+
+  &:hover {
+    background: var(--carmim);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.25);
+  }
+}
+
+/* Ícones */
+.icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Instagram */
+.btnInstagram {
+    border-color: var(--carmim);
+  color: var(--carmim);
+}
+
+/* Facebook */
+.btnFacebook {
+  border-color: var(--fb-azul);
+  color: var(--fb-azul);
+
+  &:hover {
+    background: var(--fb-azul);
+    color: #fff;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(59, 89, 152, 0.25);
+  }
+}
+
+/* TikTok */
+.btnTiktok {
+  border-color: black;
+  color: black;
+  background: #fff;
+
+  &:hover {
+    background: var(--preto);
+    color: #fff;
+    border-color: var(--preto);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

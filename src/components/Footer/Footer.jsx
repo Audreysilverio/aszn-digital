@@ -3,15 +3,16 @@ import iconeFacebook from "../../assets/iconeFacebook.png";
 import iconeYoutube from "../../assets/iconeYoutube.png";
 import iconeLinkedin from "../../assets/iconeLinkedin.png";
 import iconeInstagram from "../../assets/iconeInstagram.png";
+import iconeTiktok from "../../assets/iconeTiktok.svg";
 
 export default function Footer() {
   return (
     <footer className={s.footer}>
       <section className={s.contatosFooter}>
-        <p>Associação Sempre Zaki Narchi - São Paulo/SP</p>
+        <p>Associação Sempre Zaki Narchi — São Paulo/SP</p>
 
-        <nav>
-          {/* --- Facebook oficial da ONG --- */}
+        <nav className={s.redes}>
+          {/* --- Facebook --- */}
           <a
             href="https://www.facebook.com/asznong/?locale=pt_BR"
             target="_blank"
@@ -25,7 +26,7 @@ export default function Footer() {
             />
           </a>
 
-          {/* --- Instagram oficial da ONG --- */}
+          {/* --- Instagram --- */}
           <a
             href="https://www.instagram.com/sempre_zakinarchi/"
             target="_blank"
@@ -39,7 +40,21 @@ export default function Footer() {
             />
           </a>
 
-          {/* --- LinkedIn (você vai adicionar depois) --- */}
+          {/* --- TikTok --- */}
+          <a
+            href="https://www.tiktok.com/@sempre_zakinarchi"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TikTok da ONG Sempre Zaki Narchi"
+          >
+            <img
+              src={iconeTiktok}
+              alt="Ícone branco do TikTok"
+              className={s.icon}
+            />
+          </a>
+
+          {/* --- LinkedIn --- */}
           <a
             href="https://www.linkedin.com/in/seu-perfil-aqui/"
             target="_blank"
@@ -53,7 +68,7 @@ export default function Footer() {
             />
           </a>
 
-          {/* --- YouTube (vídeo do Projeto Integrador) --- */}
+          {/* --- YouTube --- */}
           <a
             href="https://www.youtube.com/seu-video-aqui"
             target="_blank"
@@ -71,8 +86,8 @@ export default function Footer() {
 
       <section className={s.copyright}>
         <p>
-          Layout desenvolvido pelos alunos da UNIVESP do Eixo de Computação para
-          fins educativos — 2025
+          Layout desenvolvido pelos alunos da UNIVESP do Eixo de Computação —
+          2025 • Projeto Sempre Zaki Narchi Digital
         </p>
       </section>
     </footer>
