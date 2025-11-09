@@ -1,28 +1,64 @@
+@use "sass:color";
+@use "../../styles/variables" as *;
+
+/* ===== FOOTER PRINCIPAL ===== */
 .footer {
   background: #111; /* preto */
   color: #fff;
   text-align: center;
-  padding: 2rem 1rem 1rem;
   font-size: 0.95rem;
+
+  /* altura adaptável */
+  min-height: 120px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+  margin-top: auto;
+  padding: 1.5rem 1rem 1rem;
+  position: relative;
+  z-index: 5;
+
+  /* garante que fique sempre no fim da tela */
+  flex-shrink: 0;
 }
 
+/* ===== BLOCO DE CONTATOS ===== */
 .contatosFooter {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 
   p {
-    margin-bottom: 1rem;
+    margin: 0.3rem 0;
     font-weight: 600;
     letter-spacing: 0.3px;
   }
+
+  .email {
+    font-weight: 400;
+
+    a {
+      color: $carmin;
+      text-decoration: none;
+      transition: color 0.25s ease;
+
+      &:hover {
+        color: color.adjust($carmin, $lightness: -6%);
+      }
+    }
+  }
 }
 
-/* Ícones de redes sociais */
+/* ===== REDES SOCIAIS ===== */
 .redes {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 0.3rem;
 }
 
 .icon {
@@ -33,24 +69,31 @@
   &:hover {
     transform: scale(1.15);
     filter: invert(39%) sepia(86%) saturate(3185%) hue-rotate(339deg)
-      brightness(91%) contrast(105%); /* efeito carmim no hover */
+      brightness(91%) contrast(105%);
   }
 }
 
+/* ===== COPYRIGHT ===== */
 .copyright {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 1.5rem;
-  padding-top: 1rem;
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
 
   p {
     font-size: 0.85rem;
     color: #ccc;
     line-height: 1.4;
+    margin: 0.2rem 0;
   }
 }
 
-/* Responsivo */
+/* ===== RESPONSIVO ===== */
 @media (max-width: 768px) {
+  .footer {
+    min-height: auto;
+    padding: 1.8rem 1rem;
+  }
+
   .icon {
     width: 32px;
     height: 32px;
@@ -59,4 +102,16 @@
   .contatosFooter p {
     font-size: 0.9rem;
   }
+}
+
+/* ===== DEGRADÊ SUPERIOR ===== */
+.footer::before {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* fica acima da linha vermelha */
+  left: 0;
+  width: 100%;
+  height: 40px; /* altura da faixa cinza */
+  background: $cinza-150; /* usa seu tom cinza da paleta */
+  border-bottom: 4px solid $carmin; /* linha vermelha */
 }

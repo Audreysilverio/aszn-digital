@@ -2,7 +2,6 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
 import Inicio from "./pages/inicio/Inicio";
 import QuemSomos from "./pages/quemSomos/QuemSomos";
 import NossasAtividades from "./pages/nossasAtividades/NossasAtividades";

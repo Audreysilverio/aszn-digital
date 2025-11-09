@@ -35,17 +35,23 @@ export default function Inicio() {
 
         <div className={s.feedWrapper}>
           <iframe
-            title="Feed Instagram ASZN"
-            src="https://cdn.lightwidget.com/widgets/da75afa70c26559ea044467291f726c0.html"
-            scrolling="no"
-            allowTransparency="true"
-            className="lightwidget-widget"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            onLoad={() =>
-              setTimeout(() => window.dispatchEvent(new Event("resize")), 100)
-            }
-          ></iframe>
+  title="Feed Instagram ASZN"
+  src="https://cdn.lightwidget.com/widgets/da75afa70c26559ea044467291f726c0.html?theme=light"
+  scrolling="no"
+  allowTransparency="true"
+  className="lightwidget-widget"
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  style={{
+    display: "block",
+    width: "100%",
+    border: 0,
+    backgroundColor: "#fff", // evita bordas pretas
+    lineHeight: 0,
+  }}
+  onLoad={() => setTimeout(() => window.dispatchEvent(new Event("resize")), 100)}
+></iframe>
+
         </div>
 
         <p className={s.fallback}>

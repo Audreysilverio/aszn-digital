@@ -1,7 +1,32 @@
+/* =================================================================== */
+/* PÁGINA INÍCIO – layout corrigido e responsivo                       */
+/* =================================================================== */
+
+/* Fundo branco exclusivo desta página */
+section.inicio {
+  background-color: #fff;
+}
+
+/* =================================================================== */
+/* VARIÁVEIS DE CORES                                                  */
+/* =================================================================== */
+:root {
+  --carmim: #c8102e;
+  --cinza-100: #f8f8f8;
+  --cinza-200: #eeeeee;
+  --cinza-700: #444444;
+  --preto: #000000;
+  --branco: #ffffff;
+}
+
+/* =================================================================== */
+/* BLOCO PRINCIPAL                                                     */
+/* =================================================================== */
 .inicio {
-  color: #000;
+  color: var(--preto);
   text-align: center;
   padding: 2rem 1rem;
+  background-color: transparent;
 
   h2 {
     font-size: 2rem;
@@ -15,23 +40,27 @@
     max-width: 700px;
     margin: 1rem auto;
     line-height: 1.6;
-    color: #444;
+    color: var(--cinza-700);
     font-size: 1rem;
   }
 }
 
-/* === FEED DO INSTAGRAM === */
+/* =================================================================== */
+/* FEED DO INSTAGRAM                                                   */
+/* =================================================================== */
 .feedContainer {
   max-width: 1100px;
   margin: 2rem auto 0 auto;
   border-radius: 16px;
-  padding: 1rem 0 0; /* tira o padding inferior que criava o vão */
-  background: transparent; /* sem fundo cinza, usa o fundo do site */
+  padding: 1.5rem 0 0;
+  background-color: var(--cinza-100) !important;
+  box-shadow: none;
 
   h3 {
     margin: 0.5rem 0 1rem;
     font-size: 1.25rem;
     font-weight: 700;
+    color: #111;
   }
 }
 
@@ -40,45 +69,61 @@
   width: 100%;
   overflow: hidden;
   border-radius: 12px;
-  background: #fff;
+  background-color: var(--branco);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  isolation: isolate;
 }
 
-/* LightWidget (global) */
+/* Widget global */
 :global(.lightwidget-widget) {
   width: 100%;
   border: 0;
   overflow: hidden;
   display: block;
-  min-height: 210px; /* altura mínima ajustada */
+  min-height: 210px;
   border-radius: 12px;
-  background: #fff;
+  background-color: var(--branco);
 }
 
-/* Link de fallback */
+/* =================================================================== */
+/* FALLBACK DO FEED                                                    */
+/* =================================================================== */
 .fallback {
   margin-top: 0.5rem;
-  color: #444;
+  color: var(--cinza-700);
   font-size: 0.95rem;
 
   a {
-    color: #c8102e;
+    color: var(--carmim);
     font-weight: 700;
     text-decoration: none;
 
     &:hover {
       text-decoration: underline;
     }
+
+    &:focus-visible {
+      outline: 2px solid var(--carmim);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
   }
 }
 
-/* === BOTÕES DAS REDES === */
+/* =================================================================== */
+/* REDES SOCIAIS                                                       */
+/* =================================================================== */
+
+
 .redesContainer {
-  margin-top: 1.5rem;
+  margin: 2rem auto 2.5rem; /* espaçamento acima/abaixo */
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  max-width: 900px;
 }
 
 .btn {
@@ -86,13 +131,34 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 2rem;
   border-radius: 8px;
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  transition: all 0.25s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+  background-color: transparent;
+  border: 2px solid currentColor;
+  min-width: 180px;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
 }
 
 .icon {
@@ -102,56 +168,120 @@
 
 /* Instagram (vermelho carmim) */
 .btnInstagram {
-  border: 2px solid #c8102e;
-  color: #c8102e;
+  color: var(--carmim, #c8102e);
+  border-color: var(--carmim, #c8102e);
 
   &:hover {
-    background: #c8102e;
-    color: #fff;
+    background-color: var(--carmim, #c8102e);
+    color: var(--branco, #fff);
   }
 }
 
 /* Facebook (azul institucional) */
 .btnFacebook {
-  border: 2px solid #3b5998;
   color: #3b5998;
+  border-color: #3b5998;
 
   &:hover {
-    background: #3b5998;
+    background-color: #3b5998;
     color: #fff;
   }
 }
 
-/* TikTok (preto com hover carmim) */
+/* TikTok (preto) */
 .btnTiktok {
-  border: 2px solid white;
-  color: white;
+  color: var(--preto, #000);
+  border-color: var(--preto, #000);
 
   &:hover {
-    background: white;
-    color: black;
-    border-color: white;
+    background-color: var(--preto, #000);
+    color: var(--branco, #fff);
   }
 }
 
-/* === RESPONSIVIDADE === */
+/* =================================================================== */
+/* RESPONSIVIDADE — MOBILE                                              */
+/* =================================================================== */
+
 @media (max-width: 768px) {
   .inicio {
+    padding: 1rem 0.5rem;
+
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     p {
       font-size: 0.95rem;
+      line-height: 1.5;
     }
   }
 
-  .btn {
+  /* feed ocupa 100% da tela, sem espaço lateral */
+  .feedContainer {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-radius: 0;
+    background-color: var(--cinza-100, #f8f8f8);
+  }
+
+  .feedWrapper {
     width: 100%;
-    max-width: 260px;
+    border-radius: 0;
+    background-color: var(--branco);
   }
 
   :global(.lightwidget-widget) {
-    min-height: 260px;
+    min-height: 330px;
+    width: 100%;
+    border: none;
+    margin: 0;
+    display: block;
+    background-color: #fff;
+  }
+
+  .fallback {
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  /* redes sociais empilhadas */
+  .redesContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 2rem auto;
+    width: 100%;
+  }
+
+  .btn {
+    width: 90%;
+    max-width: 320px;
+    justify-content: center;
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  .inicio {
+    margin-bottom: 2rem;
+  }
+}
+
+/* =================================================================== */
+/* SALVAGUARDA CONTRA TEMA ESCURO GLOBAL                                */
+/* =================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .feedContainer {
+    background-color: var(--cinza-200, #eee) !important;
+  }
+
+  .feedWrapper,
+  :global(.lightwidget-widget) {
+    background-color: var(--branco, #fff);
   }
 }

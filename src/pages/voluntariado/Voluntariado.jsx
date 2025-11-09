@@ -31,7 +31,6 @@ export default function Voluntariado() {
       return;
     }
 
-    // payload do jeito que o back espera
     const payload = {
       nome: form.nome.trim(),
       email: form.email.trim(),
@@ -55,7 +54,6 @@ export default function Voluntariado() {
         aceiteLGPD: false,
       });
     } catch (e) {
-      // interceptor já converte respostas do back em mensagens amigáveis
       setErr(e.message || "Não foi possível enviar. Tente novamente.");
     } finally {
       setLoading(false);
@@ -63,103 +61,233 @@ export default function Voluntariado() {
   };
 
   return (
-    <div style={{ maxWidth: 720, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1 style={{ marginBottom: ".75rem" }}>Seja Voluntário(a)</h1>
-      <p style={{ marginBottom: "1.25rem", color: "#555" }}>
-        Preencha o formulário e retornaremos em breve.
-      </p>
+    <section className="voluntariado">
+      <style>{`
+        .voluntariado {
+          background-color: #fff;
+          min-height: 100vh;
+          padding: 3rem 1rem 5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+        }
 
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: "0.75rem" }}>
-        <input
-          name="nome"
-          value={form.nome}
-          onChange={onChange}
-          placeholder="Nome completo"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={onChange}
-          placeholder="E-mail"
-          required
-        />
-        <input
-          name="telefone"
-          value={form.telefone}
-          onChange={onChange}
-          placeholder="WhatsApp"
-          required
-        />
+        .form-box {
+          width: 100%;
+          max-width: 600px;
+          background: #fafafa;
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+          margin-bottom: 3rem;
+        }
 
-        <select
-          name="areaInteresse"
-          value={form.areaInteresse}
-          onChange={onChange}
-          required
-        >
-          <option value="">Área de interesse</option>
-          <option value="Ballet">Ballet</option>
-          <option value="Capoeira">Capoeira</option>
-          <option value="Reforço Escolar">Reforço Escolar</option>
-          <option value="Informática">Informática</option>
-          <option value="Administração/Eventos">Administração/Eventos</option>
-          <option value="Outra">Outra</option>
-        </select>
+        h1 {
+          text-align: center;
+          margin-bottom: 0.5rem;
+          font-size: 1.75rem;
+          color: #111;
+          text-transform: uppercase;
+        }
 
-        <select
-          name="disponibilidade"
-          value={form.disponibilidade}
-          onChange={onChange}
-          required
-        >
-          <option value="">Disponibilidade</option>
-          <option value="Manhã">Manhã</option>
-          <option value="Tarde">Tarde</option>
-          <option value="Noite">Noite</option>
-          <option value="Finais de semana">Finais de semana</option>
-        </select>
+        p.descricao {
+          text-align: center;
+          margin-bottom: 1.5rem;
+          color: #555;
+        }
 
-        <textarea
-          name="mensagem"
-          value={form.mensagem}
-          onChange={onChange}
-          placeholder="Mensagem (opcional)"
-          rows={4}
-        />
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 0.9rem;
+        }
 
-        <label style={{ display: "flex", gap: ".5rem", alignItems: "center" }}>
+        input, select, textarea {
+          width: 100%;
+          padding: 0.8rem 1rem;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          font-size: 1rem;
+          font-family: inherit;
+          transition: border-color 0.2s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+          border-color: #c8102e;
+          outline: none;
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+
+        /* Checkbox LGPD alinhado lado a lado */
+        .checkbox-container {
+          display: inline-flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 0.5rem;
+          width: 100%;
+          font-size: 0.95rem;
+          color: #333;
+          line-height: 1.4;
+          margin-top: 0.5rem;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+          accent-color: #c8102e;
+          margin: 0;
+          position: relative;
+          top: 1px;
+        }
+
+        button {
+          background-color: #c8102e;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 0.9rem;
+          font-weight: 700;
+          font-size: 1rem;
+          text-transform: uppercase;
+          margin-top: 0.75rem;
+          cursor: pointer;
+          transition: background 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+          background-color: #a20c23;
+          transform: translateY(-1px);
+        }
+
+        button:disabled {
+          background-color: #aaa;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .msg-ok {
+          background-color: #e8f5e9;
+          color: #1a7f37;
+          border: 1px solid #1a7f37;
+          border-radius: 8px;
+          padding: 0.8rem;
+          text-align: center;
+          font-weight: 600;
+          margin-top: 0.5rem;
+        }
+
+        .msg-err {
+          background-color: #fdecea;
+          color: #c8102e;
+          border: 1px solid #c8102e;
+          border-radius: 8px;
+          padding: 0.8rem;
+          text-align: center;
+          font-weight: 600;
+          margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+          .form-box {
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+          }
+          h1 {
+            font-size: 1.5rem;
+          }
+        }
+      `}</style>
+
+      <div className="form-box">
+        <h1>Seja Voluntário(a)</h1>
+        <p className="descricao">
+          Preencha o formulário e retornaremos em breve.
+        </p>
+
+        <form onSubmit={onSubmit}>
           <input
-            type="checkbox"
-            name="aceiteLGPD"
-            checked={form.aceiteLGPD}
+            name="nome"
+            value={form.nome}
             onChange={onChange}
+            placeholder="Nome completo"
+            required
           />
-          Autorizo o uso dos meus dados conforme a LGPD.
-        </label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={onChange}
+            placeholder="E-mail"
+            required
+          />
+          <input
+            name="telefone"
+            value={form.telefone}
+            onChange={onChange}
+            placeholder="WhatsApp"
+            required
+          />
 
-        <button
-          disabled={loading}
-          style={{
-            background: "#c8102e",
-            color: "#fff",
-            border: 0,
-            borderRadius: 8,
-            padding: "0.75rem 1rem",
-            fontWeight: 700,
-          }}
-        >
-          {loading ? "Enviando..." : "Enviar"}
-        </button>
+          <select
+            name="areaInteresse"
+            value={form.areaInteresse}
+            onChange={onChange}
+            required
+          >
+            <option value="">Área de interesse</option>
+            <option value="Ballet">Ballet</option>
+            <option value="Capoeira">Capoeira</option>
+            <option value="Reforço Escolar">Reforço Escolar</option>
+            <option value="Informática">Informática</option>
+            <option value="Administração/Eventos">Administração/Eventos</option>
+            <option value="Outra">Outra</option>
+          </select>
 
-        {ok && (
-          <p style={{ color: "#1a7f37" }}>
-            ✅ Recebido! Em breve entraremos em contato.
-          </p>
-        )}
-        {err && <p style={{ color: "#c8102e" }}>⚠️ {err}</p>}
-      </form>
-    </div>
+          <select
+            name="disponibilidade"
+            value={form.disponibilidade}
+            onChange={onChange}
+            required
+          >
+            <option value="">Disponibilidade</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+            <option value="Finais de semana">Finais de semana</option>
+          </select>
+
+          <textarea
+            name="mensagem"
+            value={form.mensagem}
+            onChange={onChange}
+            placeholder="Mensagem (opcional)"
+          />
+
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="aceiteLGPD"
+              checked={form.aceiteLGPD}
+              onChange={onChange}
+            />
+            <span>Autorizo o uso dos meus dados conforme a LGPD.</span>
+          </div>
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Enviando..." : "Enviar"}
+          </button>
+
+          {ok && (
+            <p className="msg-ok">✅ Recebido! Em breve entraremos em contato.</p>
+          )}
+          {err && <p className="msg-err">⚠️ {err}</p>}
+        </form>
+      </div>
+    </section>
   );
 }

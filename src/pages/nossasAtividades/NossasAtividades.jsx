@@ -24,25 +24,25 @@ import mercadoTrabalho from "../../assets/mercadoTrabalho.png";
 import escolaMecanico from "../../assets/escolaMecanico.png";
 
 const linkCadastro =
-  "https://docs.google.com/forms/d/e/1FAIpQLScxkkHtIWXQgQkRDj5oYKd2tQWonG4bOIo2efqG-er6mn5wYw/viewform?fbclid=PAVERFWANedAVleHRuA2FlbQIxMQABpyVKPX8tEgrGysylf4M5P7D7irRjuujxHic62LS2jG1ILKuLIPd6V8K2bh4q_aem_lpPZPAMpQwGMh7xM3QJjtg";
+  "https://docs.google.com/forms/d/e/1FAIpQLScxkkHtIWXQgQkRDj5oYKd2tQWonG4bOIo2efqG-er6mn5wYw/viewform";
 
-// 🔗 URLs oficiais
+// 🔗 Redes oficiais
 const social = {
   instagram: "https://www.instagram.com/sempre_zakinarchi/",
   facebook: "https://www.facebook.com/asznong/?locale=pt_BR",
-  // youtube: "https://youtube.com/@seu-canal" // opcional
+  tiktok: "https://www.tiktok.com/@sempre_zakinarchi",
 };
 
 const atividades = [
-  { id: 1,  titulo: "Promotor de Vendas", descricao: "Curso que desenvolve noções fundamentais de comunicação, atendimento e técnicas básicas de venda para iniciar no comércio com segurança.", imagem: promotorVendas },
-  { id: 2,  titulo: "Ioga", descricao: "Prática que integra corpo e mente, com exercícios de respiração, alongamentos e relaxamento, respeitando o ritmo de cada participante.", imagem: ioga },
-  { id: 3,  titulo: "Ballet", descricao: "Atividade artística que favorece postura, coordenação e expressão, em ambiente acolhedor e adequado a diferentes faixas etárias.", imagem: bale },
-  { id: 4,  titulo: "Capoeira", descricao: "Expressão cultural brasileira que une movimento, musicalidade e história, promovendo respeito e pertencimento.", imagem: capoeira },
-  { id: 5,  titulo: "Reforço Escolar", descricao: "Acompanhamento pedagógico para fortalecimento de conteúdos e hábitos de estudo, com foco nas necessidades de cada estudante.", imagem: reforco },
-  { id: 6,  titulo: "Manicure e Pedicure", descricao: "Introdução às rotinas de cuidados com as unhas, higiene, organização do material e noções de atendimento ao cliente.", imagem: manicurePedicure },
-  { id: 7,  titulo: "Design de Sobrancelhas", descricao: "Conteúdos básicos sobre simetria facial, biossegurança e técnicas iniciais de modelagem.", imagem: designSobrancelha },
-  { id: 8,  titulo: "Alongamento de Unhas", descricao: "Noções introdutórias sobre materiais, preparo das unhas e boas práticas para resultados seguros.", imagem: alongamento },
-  { id: 9,  titulo: "Elétrica", descricao: "Conceitos fundamentais de instalações residenciais, segurança e uso responsável de ferramentas.", imagem: eletrica },
+  { id: 1, titulo: "Promotor de Vendas", descricao: "Curso que desenvolve noções fundamentais de comunicação, atendimento e técnicas básicas de venda para iniciar no comércio com segurança.", imagem: promotorVendas },
+  { id: 2, titulo: "Ioga", descricao: "Prática que integra corpo e mente, com exercícios de respiração, alongamentos e relaxamento, respeitando o ritmo de cada participante.", imagem: ioga },
+  { id: 3, titulo: "Ballet", descricao: "Atividade artística que favorece postura, coordenação e expressão, em ambiente acolhedor e adequado a diferentes faixas etárias.", imagem: bale },
+  { id: 4, titulo: "Capoeira", descricao: "Expressão cultural brasileira que une movimento, musicalidade e história, promovendo respeito e pertencimento.", imagem: capoeira },
+  { id: 5, titulo: "Reforço Escolar", descricao: "Acompanhamento pedagógico para fortalecimento de conteúdos e hábitos de estudo, com foco nas necessidades de cada estudante.", imagem: reforco },
+  { id: 6, titulo: "Manicure e Pedicure", descricao: "Introdução às rotinas de cuidados com as unhas, higiene, organização do material e noções de atendimento ao cliente.", imagem: manicurePedicure },
+  { id: 7, titulo: "Design de Sobrancelhas", descricao: "Conteúdos básicos sobre simetria facial, biossegurança e técnicas iniciais de modelagem.", imagem: designSobrancelha },
+  { id: 8, titulo: "Alongamento de Unhas", descricao: "Noções introdutórias sobre materiais, preparo das unhas e boas práticas para resultados seguros.", imagem: alongamento },
+  { id: 9, titulo: "Elétrica", descricao: "Conceitos fundamentais de instalações residenciais, segurança e uso responsável de ferramentas.", imagem: eletrica },
   { id: 10, titulo: "Escolinha de Futebol", descricao: "Prática esportiva que estimula cooperação, disciplina e respeito às regras, além do desenvolvimento motor.", imagem: escolinhaFutebol },
   { id: 11, titulo: "Percussão", descricao: "Vivência musical com ritmos brasileiros, improvisação e trabalho coletivo.", imagem: percussao },
   { id: 12, titulo: "Desenvolvimento Profissional", descricao: "Oficinas sobre empregabilidade, postura profissional, comunicação e preparação para processos seletivos.", imagem: desenvolvimentoProfissional },
@@ -56,7 +56,7 @@ const atividades = [
   { id: 20, titulo: "Lubrificação Automotiva – Escola do Mecânico", descricao: "Noções básicas sobre troca de óleo e cuidados essenciais, com foco em procedimentos seguros e responsabilidade ambiental.", imagem: escolaMecanico },
 ];
 
-// títulos com fotos “em pé” (usa card--portrait)
+// títulos com fotos “em pé”
 const portrait = new Set([
   "Ballet",
   "Jiu-jitsu",
@@ -67,7 +67,7 @@ const portrait = new Set([
   "Alongamento de Unhas",
 ]);
 
-// focos opcionais por atividade (top/bottom/left/right/center/contain)
+// foco de imagem por atividade
 const focus = {
   Ballet: "img--top",
   "Beach Tennis": "img--bottom",
@@ -139,15 +139,42 @@ export default function NossasAtividades() {
       </a>
 
       {/* 📣 Redes sociais */}
-      
-        <div className={styles["social-container"]}>
-  <h3>Fique ligado nas nossas redes sociais</h3>
-  <p>Acompanhe novidades, inscrições e fotos das atividades:</p>
-  <nav aria-label="Redes sociais">
-    {social.instagram && <a href={social.instagram} target="_blank" rel="noopener noreferrer" className={styles["btn-saiba-mais"]}>📸 Instagram</a>}
-    {social.facebook &&  <a href={social.facebook}  target="_blank" rel="noopener noreferrer" className={styles["btn-saiba-mais"]}>👍 Facebook</a>}
-  </nav>
-</div>
+      <div className={styles["social-container"]}>
+        <h3>Fique ligado nas nossas redes sociais</h3>
+        <p>Acompanhe novidades, inscrições e fotos das atividades:</p>
+        <nav aria-label="Redes sociais">
+          {social.instagram && (
+            <a
+              href={social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["btn-saiba-mais"]}
+            >
+              📸 Instagram
+            </a>
+          )}
+          {social.facebook && (
+            <a
+              href={social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["btn-saiba-mais"]}
+            >
+              👍 Facebook
+            </a>
+          )}
+          {social.tiktok && (
+            <a
+              href={social.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["btn-saiba-mais"]}
+            >
+              🎵 TikTok
+            </a>
+          )}
+        </nav>
+      </div>
     </section>
   );
 }
