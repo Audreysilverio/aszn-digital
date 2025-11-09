@@ -245,7 +245,7 @@ export default function Doacoes() {
               name="valor"
               value={form.valor}
               onChange={onChange}
-              placeholder="Valor (ex.: 100.00)"
+              placeholder="Somente números (ex.: 100)"
             />
           )}
           <textarea
