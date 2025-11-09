@@ -24,7 +24,7 @@ import mercadoTrabalho from "../../assets/mercadoTrabalho.png";
 import escolaMecanico from "../../assets/escolaMecanico.png";
 
 const linkCadastro =
-  "https://docs.google.com/forms/d/e/1FAIpQLScxkkHtIWXQgQkRDj5oYKd2tQWonG4bOIo2efqG-er6mn5wYw/viewform";
+  "https://docs.google.com/forms/d/e/1FAIpQLScxkkHtIWXQgQkRDj5oYKd2tQWonG4bOIo2efqG-er6mn5wYw/viewform?fbclid=PAVERFWANedAVleHRuA2FlbQIxMQABpyVKPX8tEgrGysylf4M5P7D7irRjuujxHic62LS2jG1ILKuLIPd6V8K2bh4q_aem_lpPZPAMpQwGMh7xM3QJjtg";
 
 // 🔗 Redes oficiais
 const social = {
@@ -93,7 +93,7 @@ export default function NossasAtividades() {
         className={styles["btn-saiba-mais"]}
         style={{ marginBottom: "2rem" }}
       >
-        Inscreva-se
+        📝 Inscreva-se
       </a>
 
       <div className={styles["cards-container"]}>
@@ -114,9 +114,6 @@ export default function NossasAtividades() {
                   className={`${styles.media}${imgFocus}`}
                   loading="lazy"
                 />
-                <figcaption className={styles.figcaption}>
-                  {atv.titulo}
-                </figcaption>
               </figure>
               <div className={styles["card-content"]}>
                 <h3>{atv.titulo}</h3>
@@ -135,7 +132,7 @@ export default function NossasAtividades() {
         className={styles["btn-saiba-mais"]}
         style={{ marginTop: "2rem" }}
       >
-        Inscreva-se
+        📝 Inscreva-se
       </a>
 
       {/* 📣 Redes sociais */}
@@ -143,36 +140,31 @@ export default function NossasAtividades() {
         <h3>Fique ligado nas nossas redes sociais</h3>
         <p>Acompanhe novidades, inscrições e fotos das atividades:</p>
         <nav aria-label="Redes sociais">
-          {social.instagram && (
-            <a
-              href={social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles["btn-saiba-mais"]}
-            >
-              📸 Instagram
-            </a>
-          )}
-          {social.facebook && (
-            <a
-              href={social.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles["btn-saiba-mais"]}
-            >
-              👍 Facebook
-            </a>
-          )}
-          {social.tiktok && (
-            <a
-              href={social.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles["btn-saiba-mais"]}
-            >
-              🎵 TikTok
-            </a>
-          )}
+          <a
+            href={social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["btn-saiba-mais"]}
+          >
+            📸 Instagram
+          </a>
+          <a
+            href={social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["btn-saiba-mais"]}
+          >
+            👍 Facebook
+          </a>
+          {/* TikTok SEM condição para garantir render */}
+          <a
+            href={social.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles["btn-saiba-mais"]}
+          >
+            🎵 TikTok
+          </a>
         </nav>
       </div>
     </section>
