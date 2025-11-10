@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../../services/api";
 
 const STATUS_VOLUNTARIOS = ["pendente", "aprovado", "recusado"];
 const STATUS_DOACOES = ["pendente", "confirmada", "cancelada"];
-
-const label = {
+const LABEL = {
   pendente: "Pendente",
   aprovado: "Aprovado",
   recusado: "Recusado",
@@ -12,128 +11,35 @@ const label = {
   cancelada: "Cancelada",
 };
 
-function StatusSelect({ value, onChange, tipo }) {
-  const opcoes = tipo === "voluntarios" ? STATUS_VOLUNTARIOS : STATUS_DOACOES;
-  return (
-    <select value={value || "pendente"} onChange={(e) => onChange(e.target.value)}>
-      {opcoes.map((s) => (
-        <option key={s} value={s}>
-          {label[s] ?? s}
-        </option>
-      ))}
-    </select>
-  );
-}
+// Helpers
+const moneyBR = (v) =>
+  v == null || v === ""
+    ? "-"
+    : Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const phoneDigits = (s = "") => String(s).replace(/\D/g, "");
 
-function Tabela({ dados, tipo, onAtualizar, onExcluir }) {
-  const cols = useMemo(() => {
-    if (tipo === "voluntarios") {
-      return ["Data", "Nome", "Área", "Disponibilidade", "Telefone", "Status", "Ações"];
-    }
-    return ["Data", "Doador", "Tipo", "Valor/Descrição", "Telefone", "Status", "Ações"];
-  }, [tipo]);
-
-  return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            {cols.map((c) => (
-              <th key={c} style={{ textAlign: "left", padding: "8px", borderBottom: "1px solid #eee" }}>
-                {c}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {dados.map((item) => (
-            <tr key={item.id}>
-              <td>{item.criado_em ? new Date(item.criado_em).toLocaleDateString() : "-"}</td>
-
-              {tipo === "voluntarios" ? (
-                <>
-                  <td>{item.nome}</td>
-                  <td>{item.area_interesse || "-"}</td>
-                  <td>{item.disponibilidade || "-"}</td>
-                </>
-              ) : (
-                <>
-                  <td>
-                    {item.doador_nome} ({item.doador_email})
-                  </td>
-                  <td>{item.tipo}</td>
-                  <td>{item.tipo === "dinheiro" ? item.valor ?? "-" : item.descricao || "-"}</td>
-                </>
-              )}
-
-              <td>
-                {item.telefone ? (
-                  <a
-                    href={`https://wa.me/55${String(item.telefone).replace(/\D/g, "")}`}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    WhatsApp
-                  </a>
-                ) : (
-                  "-"
-                )}
-              </td>
-
-              <td>
-                <StatusSelect value={item.status} onChange={(s) => onAtualizar(item, s)} tipo={tipo} />
-              </td>
-
-              <td>
-                <div style={{ display: "flex", gap: 8 }}>
-                  {item.email ? <a href={`mailto:${item.email}`}>E-mail</a> : <span>-</span>}
-                  <button
-                    onClick={() => onExcluir(item)}
-                    style={{
-                      background: "#c8102e",
-                      color: "#fff",
-                      border: 0,
-                      borderRadius: 6,
-                      padding: "4px 10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Excluir
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-          {dados.length === 0 && (
-            <tr>
-              <td colSpan={cols.length} style={{ padding: "16px", color: "#777" }}>
-                Nenhum registro.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
+// === COMPONENTE PRINCIPAL ===
 export default function Admin() {
   const [tab, setTab] = useState("voluntarios");
-  const [voluntarios, setVoluntarios] = useState([]);
-  const [doacoes, setDoacoes] = useState([]);
+  const [dados, setDados] = useState([]);
+  const [backup, setBackup] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const perPage = 50;
 
-  // undo snackbar
+  const [busca, setBusca] = useState("");
+
   const [undo, setUndo] = useState(null);
   const undoTimer = useRef(null);
 
-  // login inline
+  // Auth
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [authErr, setAuthErr] = useState("");
   const token = localStorage.getItem("aszn_token");
   const logado = Boolean(token);
 
+  // === LOGIN ===
   async function login(e) {
     e.preventDefault();
     setAuthErr("");
@@ -141,93 +47,89 @@ export default function Admin() {
       const { data } = await api.post("/auth/login", { email, senha });
       localStorage.setItem("aszn_token", data.access_token);
       window.location.reload();
-    } catch (err) {
-      setAuthErr(err.message || "Credenciais inválidas.");
+    } catch {
+      setAuthErr("Credenciais inválidas.");
     }
   }
 
+  // === CARREGAR LISTA ===
   async function carregar() {
     setLoading(true);
     try {
-      if (tab === "voluntarios") {
-        const { data } = await api.get("/admin/voluntarios");
-        setVoluntarios(data.voluntarios || []);
-      } else {
-        const { data } = await api.get("/admin/doacoes");
-        setDoacoes(data.doacoes || []);
-      }
+      const url = tab === "voluntarios" ? "/admin/voluntarios" : "/admin/doacoes";
+      const { data } = await api.get(url);
+      const lista = tab === "voluntarios" ? data.voluntarios : data.doacoes;
+      setBackup(lista || []);
+      setDados(lista.slice(0, perPage));
+      setPage(1);
     } finally {
       setLoading(false);
     }
   }
 
-  // Atualização de status (PUT nas rotas do back)
+  // === BUSCA ===
+  useEffect(() => {
+    if (!busca.trim()) {
+      setDados(backup.slice(0, perPage * page));
+      return;
+    }
+    const lower = busca.toLowerCase();
+    const filtrado = backup.filter((d) =>
+      Object.values(d).some((v) =>
+        String(v).toLowerCase().includes(lower)
+      )
+    );
+    setDados(filtrado.slice(0, perPage * page));
+  }, [busca, backup, page]);
+
+  // === STATUS ===
   async function atualizarStatus(item, novo) {
     try {
-      if (tab === "voluntarios") {
-        await api.put(`/admin/voluntarios/${item.id}/status`, { status: novo });
-        setVoluntarios((arr) => arr.map((v) => (v.id === item.id ? { ...v, status: novo } : v)));
-      } else {
-        await api.put(`/admin/doacoes/${item.id}/status`, { status: novo });
-        setDoacoes((arr) => arr.map((d) => (d.id === item.id ? { ...d, status: novo } : d)));
-      }
-    } catch (e) {
-      alert(e.message || "Erro ao atualizar status.");
+      const rota =
+        tab === "voluntarios"
+          ? `/admin/voluntarios/${item.id}/status`
+          : `/admin/doacoes/${item.id}/status`;
+      await api.put(rota, { status: novo });
+      setDados((arr) => arr.map((d) => (d.id === item.id ? { ...d, status: novo } : d)));
+    } catch {
+      alert("Erro ao atualizar status.");
     }
   }
 
-  // Exclusão otimista + Undo (soft delete no back após 10s)
-  async function excluirRegistro(item) {
+  // === EXCLUIR ===
+  async function excluir(item) {
     const tipo = tab;
-    const nomeItem = tipo === "voluntarios" ? item.nome : item.doador_nome;
-    const palavra = tipo === "voluntarios" ? "voluntário" : "doação";
-    const ok = confirm(`Excluir ${palavra} "${nomeItem}"?`);
-    if (!ok) return;
+    const nome = tipo === "voluntarios" ? item.nome : item.doador_nome;
+    if (!confirm(`Excluir ${tipo.slice(0, -1)} "${nome}"?`)) return;
 
     if (undoTimer.current) clearTimeout(undoTimer.current);
-
-    // remove visualmente
-    if (tipo === "voluntarios") setVoluntarios((arr) => arr.filter((v) => v.id !== item.id));
-    else setDoacoes((arr) => arr.filter((d) => d.id !== item.id));
-
-    // guarda item para possível restauração
+    setDados((arr) => arr.filter((d) => d.id !== item.id));
     setUndo({ tipo, item });
-
-    // após 10s, confirma no back (DELETE => marca deleted_at)
     undoTimer.current = setTimeout(async () => {
-      try {
-        await api.delete(`/admin/${tipo}/${item.id}`);
-      } catch (e) {
-        alert("Erro ao excluir no servidor.");
-      } finally {
-        setUndo(null);
-      }
-    }, 10000);
+      await api.delete(`/admin/${tipo}/${item.id}`);
+      setUndo(null);
+    }, 8000);
   }
 
-  // Desfazer: chama /restore no back e recarrega a lista
   async function desfazer() {
     if (!undo) return;
     clearTimeout(undoTimer.current);
-    try {
-      await api.patch(`/admin/${undo.tipo}/${undo.item.id}/restore`);
-      await carregar();
-    } catch (e) {
-      alert("Erro ao restaurar.");
-    } finally {
-      setUndo(null);
-    }
+    await api.patch(`/admin/${undo.tipo}/${undo.item.id}/restore`);
+    await carregar();
+    setUndo(null);
   }
 
   useEffect(() => {
     if (logado) carregar();
   }, [tab, logado]);
 
-  if (!logado) {
+  // === LOGIN VIEW ===
+  if (!logado)
     return (
-      <div style={{ maxWidth: 420, margin: "2rem auto" }}>
+      <div className="adm-login">
+        <style>{css}</style>
         <h1>Intranet – Acesso</h1>
-        <form onSubmit={login} style={{ display: "grid", gap: "0.75rem" }}>
+        <form onSubmit={login}>
           <input
             type="email"
             placeholder="E-mail"
@@ -242,26 +144,23 @@ export default function Admin() {
             onChange={(e) => setSenha(e.target.value)}
             required
           />
-          <button
-            style={{
-              background: "#c8102e",
-              color: "#fff",
-              border: 0,
-              borderRadius: 8,
-              padding: "0.75rem 1rem",
-            }}
-          >
-            Entrar
-          </button>
-          {authErr && <p style={{ color: "#c8102e" }}>⚠️ {authErr}</p>}
+          <button className="btn-primary">Entrar</button>
+          {authErr && <p className="err">⚠️ {authErr}</p>}
         </form>
       </div>
     );
-  }
+
+  // === TABELA ===
+  const colunas =
+    tab === "voluntarios"
+      ? ["Data", "Nome", "Área", "Disponibilidade", "Telefone", "Status", "Ações"]
+      : ["Data", "Doador", "Tipo", "Valor/Descrição", "Telefone", "Status", "Ações"];
 
   return (
-    <div style={{ maxWidth: 1100, margin: "2rem auto", padding: "0 1rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div className="adm-wrap">
+      <style>{css}</style>
+
+      <div className="adm-head">
         <h1>Intranet</h1>
         <button
           onClick={() => {
@@ -273,60 +172,175 @@ export default function Admin() {
         </button>
       </div>
 
-      <div style={{ display: "flex", gap: "0.5rem", margin: "1rem 0" }}>
+      <div className="tabs">
         <button
+          className={tab === "voluntarios" ? "active" : ""}
           onClick={() => setTab("voluntarios")}
-          style={{
-            background: tab === "voluntarios" ? "#c8102e" : "#eee",
-            color: tab === "voluntarios" ? "#fff" : "#111",
-            border: 0,
-            borderRadius: 6,
-            padding: ".5rem 1rem",
-          }}
         >
           Voluntários
         </button>
         <button
+          className={tab === "doacoes" ? "active" : ""}
           onClick={() => setTab("doacoes")}
-          style={{
-            background: tab === "doacoes" ? "#c8102e" : "#eee",
-            color: tab === "doacoes" ? "#fff" : "#111",
-            border: 0,
-            borderRadius: 6,
-            padding: ".5rem 1rem",
-          }}
         >
           Doações
         </button>
       </div>
 
-      {loading && <p>Carregando...</p>}
+      <input
+        type="search"
+        placeholder="Buscar nome, e-mail, tipo..."
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        className="busca"
+      />
 
-      {tab === "voluntarios" ? (
-        <Tabela dados={voluntarios} tipo="voluntarios" onAtualizar={atualizarStatus} onExcluir={excluirRegistro} />
+      {loading ? (
+        <p>Carregando...</p>
       ) : (
-        <Tabela dados={doacoes} tipo="doacoes" onAtualizar={atualizarStatus} onExcluir={excluirRegistro} />
+        <div className="tableWrap">
+          <table className="adm-table">
+            <thead>
+              <tr>
+                {colunas.map((c) => (
+                  <th key={c}>{c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {dados.map((d) => (
+                <tr key={d.id} className="adm-row">
+                  <td>{new Date(d.criado_em).toLocaleString("pt-BR")}</td>
+                  {tab === "voluntarios" ? (
+                    <>
+                      <td className="strong">{d.nome}</td>
+                      <td>{d.area_interesse}</td>
+                      <td>{d.disponibilidade}</td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="strong">
+                        {d.doador_nome}{" "}
+                        <span className="muted">({d.doador_email})</span>
+                      </td>
+                      <td className="caps">{d.tipo}</td>
+                      <td>
+                        {d.tipo === "dinheiro"
+                          ? moneyBR(d.valor)
+                          : d.descricao || "-"}
+                      </td>
+                    </>
+                  )}
+                  <td>
+                    {d.telefone ? (
+                      <a
+                        href={`https://wa.me/55${phoneDigits(d.telefone)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-link"
+                      >
+                        WhatsApp
+                      </a>
+                    ) : (
+                      <span className="muted">—</span>
+                    )}
+                  </td>
+                  <td>
+                    <div
+                      className={`status status--${(d.status || "pendente").toLowerCase()}`}
+                    >
+                      <span className="dot" />
+                      <select
+                        value={d.status}
+                        onChange={(e) => atualizarStatus(d, e.target.value)}
+                      >
+                        {(tab === "voluntarios"
+                          ? STATUS_VOLUNTARIOS
+                          : STATUS_DOACOES
+                        ).map((s) => (
+                          <option key={s}>{LABEL[s]}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </td>
+                  <td className="actions">
+                    {d.email && (
+                      <a href={`mailto:${d.email}`} className="btn-link">
+                        E-mail
+                      </a>
+                    )}
+                    <button
+                      className="btn-float danger"
+                      onClick={() => excluir(d)}
+                      title="Excluir"
+                    >
+                      🗑️
+                    </button>
+                  </td>
+                </tr>
+              ))}
+
+              {dados.length === 0 && (
+                <tr>
+                  <td colSpan={colunas.length} className="empty">
+                    Nenhum registro.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+
+          {!busca && dados.length < backup.length && (
+            <button className="btn-more" onClick={() => setPage(page + 1)}>
+              Mostrar mais
+            </button>
+          )}
+        </div>
       )}
 
       {undo && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "#111",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: 6,
-          }}
-        >
+        <div className="snackbar">
           <span>Registro removido.</span>
-          <button onClick={desfazer} style={{ marginLeft: 10, textDecoration: "underline", color: "#fff" }}>
-            Desfazer
-          </button>
+          <button onClick={desfazer}>Desfazer</button>
         </div>
       )}
     </div>
   );
 }
+
+// === CSS embutido ===
+const css = `
+.adm-wrap{max-width:1100px;margin:2rem auto;padding:0 1rem;color:#111}
+.adm-head{display:flex;justify-content:space-between;align-items:center}
+.adm-head button{background:#eee;border:0;border-radius:6px;padding:.5rem 1rem;cursor:pointer;font-weight:700}
+.tabs{display:flex;gap:.5rem;margin:1rem 0}
+.tabs button{background:#eee;border:0;border-radius:6px;padding:.5rem 1rem;cursor:pointer;font-weight:700}
+.tabs .active{background:#c8102e;color:#fff}
+.busca{width:100%;padding:.6rem .8rem;margin-bottom:1rem;border:1px solid #ddd;border-radius:8px;font-size:1rem}
+.tableWrap{overflow-x:auto;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.adm-table{width:100%;border-collapse:collapse;min-width:900px}
+.adm-table th{text-align:left;padding:10px;border-bottom:1px solid #ddd;font-weight:800}
+.adm-table td{padding:10px;border-bottom:1px solid #eee;vertical-align:middle}
+.adm-row:hover{background:#fafafa}
+.strong{font-weight:700}.muted{color:#777}.caps{text-transform:uppercase;font-size:.9rem}.btn-link{color:#c8102e;text-decoration:none;font-weight:600}
+.btn-link:hover{text-decoration:underline}
+.status{display:flex;align-items:center;gap:.4rem}
+.status .dot{width:10px;height:10px;border-radius:50%}
+.status--pendente .dot{background:#f4c20d}
+.status--aprovado .dot,.status--confirmada .dot{background:#1a7f37}
+.status--recusado .dot,.status--cancelada .dot{background:#c8102e}
+.actions{display:flex;align-items:center;gap:.5rem}
+.btn-float{background:transparent;border:none;cursor:pointer;opacity:.15;font-size:1.1rem;transition:.2s}
+.adm-row:hover .btn-float{opacity:1}
+.btn-float:hover{transform:scale(1.15);color:#b3051a}
+.empty{text-align:center;padding:2rem;color:#666}
+.btn-more{display:block;margin:1rem auto;padding:.6rem 1.2rem;background:#eee;border:0;border-radius:8px;font-weight:700;cursor:pointer}
+.btn-more:hover{background:#ddd}
+.snackbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:.7rem 1rem;border-radius:8px;display:flex;gap:.5rem}
+.snackbar button{background:transparent;border:0;color:#fff;text-decoration:underline;cursor:pointer}
+.adm-login{max-width:400px;margin:2rem auto;text-align:center}
+.adm-login form{display:grid;gap:.75rem}
+.adm-login input{border:1px solid #ddd;border-radius:8px;padding:.7rem .9rem;font-size:1rem}
+.btn-primary{background:#c8102e;color:#fff;border:0;border-radius:8px;padding:.7rem 1rem;font-weight:800;cursor:pointer}
+.err{color:#c8102e;font-weight:700}
+`;
