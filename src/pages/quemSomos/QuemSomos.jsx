@@ -26,6 +26,18 @@ export default function QuemSomos() {
             empreendedorismo para fortalecer vínculos e transformar vidas.
           </p>
         </div>
+
+        <div className={s.localizacaoBox}>
+          <h3>📍 Localização</h3>
+          <p>
+            Estamos localizados na{" "}
+            <strong>
+              Av. Zaki Narchi, 629 – Carandiru, São Paulo/SP – CEP 02029-000
+            </strong>
+            , próximo à Marginal Tietê e aos complexos de shoppings{" "}
+            <strong>Lar Center</strong> e <strong>Center Norte</strong>.
+          </p>
+        </div>
       </div>
     </section>
   );
