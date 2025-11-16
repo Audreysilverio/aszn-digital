@@ -1,10 +1,3 @@
-```{=html}
-<p align="center">
-```
-`<img src="https://imgur.com/qUuPPCn.png" width="100%" alt="ASZN Digital - Banner Oficial">`{=html}
-```{=html}
-</p>
-```
 # ASZN Digital
 
 > Plataforma oficial da **Associação Sempre Zaki Narchi** -- site
