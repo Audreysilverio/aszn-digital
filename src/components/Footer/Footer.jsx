@@ -55,7 +55,7 @@ export default function Footer() {
 
         {/* --- LinkedIn --- */}
         <a
-          href="https://www.linkedin.com/company/associacao-sempre-zaki-narchi"
+          href="https://www.linkedin.com/company/associa%C3%A7%C3%A3o-sempre-zaki-narchi-aszn/posts/?feedView=all"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn da Associação Sempre Zaki Narchi"
@@ -69,7 +69,7 @@ export default function Footer() {
 
         {/* --- YouTube --- */}
         <a
-          href="https://www.youtube.com/@semprezakinarchidigital"
+          href="https://www.youtube.com/@associacaosemprezakinarchi5614"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Canal YouTube da ONG Sempre Zaki Narchi"
